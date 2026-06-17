@@ -1,0 +1,9 @@
+# gstack (project-local install — not part of the website)
+gstack/
+.gstack/
+.claude/
+.omc/
+
+# OS / misc
+.DS_Store
+node_modules/

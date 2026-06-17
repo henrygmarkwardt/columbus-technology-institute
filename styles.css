@@ -1,0 +1,252 @@
+/* Columbus Technology Institute — design system
+   Tokens, type scale, layout. See DESIGN.md for the spec this implements. */
+
+:root {
+  /* Color (locked) */
+  --bg: #FFF8E8;
+  --bg-alt: #FFEDC2;
+  --accent: #912F56;
+  --text: #1F2932;
+  --text-muted: rgba(31, 41, 50, 0.66);
+  --hairline: rgba(31, 41, 50, 0.14);
+
+  /* Type */
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  /* Spacing scale (4px base) */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 5rem;
+  --space-7: 8rem;
+
+  --measure: 820px;
+  --page-x: clamp(1.5rem, 8vw, 8rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { color: inherit; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- Layout container ---- */
+.container {
+  width: 100%;
+  padding-inline: var(--page-x);
+}
+
+/* ---- Nav ---- */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-block: var(--space-3);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.brand__mark {
+  width: 1.65rem;
+  height: 1.65rem;
+  color: var(--text);
+  flex: none;
+  transition: transform 600ms cubic-bezier(.22,.61,.36,1), color 200ms ease;
+}
+.brand:hover .brand__mark { color: var(--accent); transform: rotate(45deg); }
+
+.brand__name {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+.brand__name--short { display: none; }
+
+.nav__links { display: flex; align-items: center; gap: var(--space-3); }
+.nav__link {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: var(--text);
+  padding: 0.6rem 0;          /* >= 44px tap target with line height */
+  line-height: 1.6;
+  border-bottom: 1.5px solid transparent;
+}
+.nav__link:hover { border-bottom-color: var(--hairline); }
+.nav__link[aria-current="page"] { border-bottom-color: var(--accent); }
+
+/* ---- Main / hero ---- */
+.main { flex: 1 0 auto; display: flex; flex-direction: column; }
+
+.hero {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: var(--space-6);
+}
+.hero__inner { max-width: var(--measure); }
+
+.hook {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* Rotating slot: a fixed box sized to the widest word; words swap inside.
+   Decorative — aria-hidden. The static h1 phrase carries meaning for AT. */
+.rotator {
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+  overflow: hidden;
+  height: 1.12em;
+  color: var(--accent);
+}
+.rotator__word {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform 460ms cubic-bezier(.22,.61,.36,1), opacity 460ms ease;
+  will-change: transform, opacity;
+}
+.rotator__word.is-current { transform: translateY(0); opacity: 1; }
+.rotator__word.is-exit { transform: translateY(-110%); opacity: 0; }
+
+.hero__sub {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 48ch;
+  margin: var(--space-3) 0 0;
+}
+
+.hero__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: var(--space-4);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+}
+.hero__link .arrow { transition: transform 200ms ease; }
+.hero__link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.hero__link:hover .arrow { transform: translateX(3px); }
+
+/* ---- Research page ---- */
+.page { padding-block: var(--space-6) var(--space-5); }
+.page__title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.1;
+  margin: 0;
+  max-width: var(--measure);
+}
+.rule {
+  border: 0;
+  border-top: 1.5px solid var(--accent);
+  width: 64px;
+  margin: var(--space-3) 0 var(--space-4);
+}
+.lede {
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  color: var(--text-muted);
+  max-width: 60ch;
+  margin: 0 0 var(--space-2);
+}
+.empty-note {
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  max-width: 60ch;
+  margin: 0;
+}
+
+/* ---- Footer ---- */
+.footer {
+  flex: none;
+  background: var(--bg-alt);
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  justify-content: space-between;
+  padding-block: var(--space-4);
+}
+.footer a { color: var(--text); text-decoration: none; }
+.footer a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+  .nav { padding-block: var(--space-2); }
+  .hero { padding-block: var(--space-5); }
+}
+@media (max-width: 480px) {
+  .brand__name--full { display: none; }
+  .brand__name--short { display: inline; }
+}
+
+/* ---- Reduced motion: no slide, quiet cross-fade, slower cadence (JS reads this) ---- */
+@media (prefers-reduced-motion: reduce) {
+  .rotator__word {
+    transform: none !important;
+    transition: opacity 500ms ease;
+  }
+  .rotator__word.is-current { transform: none; }
+  .rotator__word.is-exit { transform: none; }
+  .brand__mark { transition: color 200ms ease; }
+  .brand:hover .brand__mark { transform: none; }
+}
