@@ -8,7 +8,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Columbus Technology Institute" />
   <meta property="og:description" content="An independent frontier research institute. Columbus, Ohio." />
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet" />
@@ -18,9 +18,7 @@
   <header class="container">
     <nav class="nav" aria-label="Primary">
       <a class="brand" href="index.html" aria-label="Columbus Technology Institute — home">
-        <svg class="brand__mark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-          <path d="M 50 50 C 65.08 36.57 58.9 15.63 46.81 10.06 C 37.62 19.42 43.58 38.78 50 50 Z M 50 50 C 70.16 51.17 80.6 31.99 75.99 19.5 C 62.87 19.63 53.39 37.53 50 50 Z M 50 50 C 63.43 65.08 84.37 58.9 89.94 46.81 C 80.58 37.62 61.22 43.58 50 50 Z M 50 50 C 48.83 70.16 68.01 80.6 80.5 75.99 C 80.37 62.87 62.47 53.39 50 50 Z M 50 50 C 34.92 63.43 41.1 84.37 53.19 89.94 C 62.38 80.58 56.42 61.22 50 50 Z M 50 50 C 29.84 48.83 19.4 68.01 24.01 80.5 C 37.13 80.37 46.61 62.47 50 50 Z M 50 50 C 36.57 34.92 15.63 41.1 10.06 53.19 C 19.42 62.38 38.78 56.42 50 50 Z M 50 50 C 51.17 29.84 31.99 19.4 19.5 24.01 C 19.63 37.13 37.53 46.61 50 50 Z" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>
-        </svg>
+        <img class="brand__mark" src="assets/logo.png" alt="" aria-hidden="true" />
         <span class="brand__name brand__name--full">Columbus Technology Institute</span>
         <span class="brand__name brand__name--short">CIT</span>
       </a>
@@ -33,12 +31,15 @@
   <main class="main container">
     <section class="hero">
       <div class="hero__inner">
-        <h1 class="hook">
-          <span class="sr-only">The Only Frontier AI built for everyone.</span>
-          <span aria-hidden="true">The Only Frontier AI built for </span><span class="rotator" data-rotator aria-hidden="true"></span>
-        </h1>
-        <p class="hero__sub">An independent frontier research institute. Columbus, Ohio.</p>
-        <a class="hero__link" href="research.html">Read our research <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <div class="hero__text">
+          <h1 class="hook">
+            <span class="sr-only">The Only Frontier AI built for everyone.</span>
+            <span aria-hidden="true">The Only Frontier AI built for </span><span class="rotator" data-rotator aria-hidden="true"></span>
+          </h1>
+          <p class="hero__sub">An independent frontier research institute. Columbus, Ohio.</p>
+          <a class="hero__link" href="research.html">Read our research <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
+        <img class="hero__logo" src="assets/logo.png" alt="" aria-hidden="true" />
       </div>
     </section>
   </main>

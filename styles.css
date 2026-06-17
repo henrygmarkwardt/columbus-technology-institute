@@ -81,13 +81,13 @@ a { color: inherit; }
 }
 
 .brand__mark {
-  width: 1.65rem;
-  height: 1.65rem;
-  color: var(--text);
+  height: 1.85rem;
+  width: auto;
+  display: block;
   flex: none;
-  transition: transform 600ms cubic-bezier(.22,.61,.36,1), color 200ms ease;
+  transition: transform 600ms cubic-bezier(.22,.61,.36,1);
 }
-.brand:hover .brand__mark { color: var(--accent); transform: rotate(45deg); }
+.brand:hover .brand__mark { transform: rotate(45deg); }
 
 .brand__name {
   font-family: var(--sans);
@@ -121,7 +121,17 @@ a { color: inherit; }
   justify-content: center;
   padding-block: var(--space-6);
 }
-.hero__inner { max-width: var(--measure); }
+.hero__inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+}
+.hero__text { flex: 1 1 auto; max-width: var(--measure); }
+.hero__logo {
+  flex: none;
+  width: clamp(150px, 20vw, 280px);
+  height: auto;
+}
 
 .hook {
   font-family: var(--serif);
@@ -230,6 +240,10 @@ a { color: inherit; }
 .footer a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .hero__inner { flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+  .hero__logo { order: -1; width: clamp(120px, 30vw, 180px); }
+}
 @media (max-width: 640px) {
   .nav { padding-block: var(--space-2); }
   .hero { padding-block: var(--space-5); }
