@@ -6,7 +6,7 @@
   "use strict";
 
   // The assignment: grow this to 8-12 absurd-but-straight-faced words.
-  var WORDS = ["frogs", "Canadians", "pizza-making robots", "cobblers", "anglers", "fletchers", "Wainwrights", "Cartographers", "florists", "Girondins"];
+  var WORDS = ["Frogs", "Canadians", "Pizza-making robots", "Cobblers", "Anglers", "Fletchers", "Wainwrights", "Cartographers", "Florists", "Girondins"];
 
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   var rotator = document.querySelector("[data-rotator]");
