@@ -87,7 +87,7 @@ a { color: inherit; }
   flex: none;
   transition: transform 600ms cubic-bezier(.22,.61,.36,1);
 }
-.brand:hover .brand__mark { transform: rotate(45deg); }
+/* Hover rotation is accumulated in script.js (never resets), same as .hero__logo. */
 
 .brand__name {
   font-family: var(--sans);
@@ -133,7 +133,8 @@ a { color: inherit; }
   height: auto;
   transition: transform 600ms cubic-bezier(.22,.61,.36,1);
 }
-.hero__logo:hover { transform: rotate(45deg); }
+/* Rotation is accumulated in script.js on each hover (never resets), so the
+   mark keeps turning as you move the cursor on and off it. */
 
 .hook {
   font-family: var(--serif);
@@ -263,8 +264,6 @@ a { color: inherit; }
   }
   .rotator__word.is-current { transform: none; }
   .rotator__word.is-exit { transform: none; }
-  .brand__mark { transition: color 200ms ease; }
-  .brand:hover .brand__mark { transform: none; }
+  .brand__mark { transition: none; }
   .hero__logo { transition: none; }
-  .hero__logo:hover { transform: none; }
 }

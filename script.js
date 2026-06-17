@@ -75,3 +75,18 @@
     window.addEventListener("load", start);
   }
 })();
+
+/* Logo spinner — each hover adds rotation and keeps it, so moving the cursor
+   on and off repeatedly keeps turning the mark in one direction. Applies to
+   both the nav mark and the large hero logo. */
+(function () {
+  "use strict";
+  var STEP = 45; // degrees added per hover (tune to taste)
+  document.querySelectorAll(".brand__mark, .hero__logo").forEach(function (el) {
+    var angle = 0;
+    el.addEventListener("mouseenter", function () {
+      angle += STEP;
+      el.style.transform = "rotate(" + angle + "deg)";
+    });
+  });
+})();
