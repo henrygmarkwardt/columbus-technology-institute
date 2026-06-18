@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Number Bench</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0a0a0a; color: #e8e6e1; min-height: 100vh;
+  }
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 48px; border-bottom: 1px solid #222;
+  }
+  .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: 0.04em; color: #fff; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { font-size: 13px; color: #888; text-decoration: none; }
+  .nav-links a:hover { color: #fff; }
+  .hero {
+    text-align: center; padding: 80px 48px 56px;
+    max-width: 720px; margin: 0 auto;
+  }
+  .hero-badge {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #888;
+    border: 1px solid #333; border-radius: 20px; padding: 4px 12px; margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: 52px; font-weight: 700; letter-spacing: -0.03em;
+    line-height: 1.1; color: #fff; margin-bottom: 16px;
+  }
+  .hero h1 span { color: #9b8afb; }
+  .hero p { font-size: 17px; color: #888; line-height: 1.6; max-width: 480px; margin: 0 auto 32px; }
+  .hero-actions { display: flex; gap: 12px; justify-content: center; }
+  .btn-primary {
+    background: #fff; color: #0a0a0a; border: none; border-radius: 6px;
+    padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none;
+  }
+  .btn-secondary {
+    background: transparent; color: #aaa; border: 1px solid #333; border-radius: 6px;
+    padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none;
+  }
+  .section { max-width: 900px; margin: 0 auto; padding: 0 48px 80px; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #555; margin-bottom: 20px;
+  }
+  .leaderboard { border: 1px solid #222; border-radius: 12px; overflow: hidden; }
+  .lb-header {
+    display: grid; grid-template-columns: 48px 1fr 100px 140px 100px;
+    padding: 12px 20px; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: #555;
+    border-bottom: 1px solid #1a1a1a; background: #0d0d0d;
+  }
+  .lb-row {
+    display: grid; grid-template-columns: 48px 1fr 100px 140px 100px;
+    padding: 16px 20px; align-items: center; border-bottom: 1px solid #141414; cursor: pointer;
+  }
+  .lb-row:last-child { border-bottom: none; }
+  .lb-row:hover { background: #111; }
+  .lb-row.active { background: #111; }
+  .rank { font-size: 13px; font-weight: 700; color: #555; }
+  .rank.gold { color: #f5c842; }
+  .model-name { font-size: 14px; font-weight: 500; color: #e8e6e1; }
+  .model-id { font-size: 12px; color: #555; margin-top: 2px; }
+  .score { font-size: 22px; font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
+  .score-label { font-size: 11px; color: #555; }
+  .bar-wrap { height: 6px; background: #1a1a1a; border-radius: 3px; overflow: hidden; width: 100%; }
+  .bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #9b8afb, #c4b5fd); }
+  .date { font-size: 12px; color: #555; }
+  .dist-section { margin-top: 48px; }
+  .dist-title { font-size: 15px; font-weight: 600; color: #e8e6e1; margin-bottom: 4px; }
+  .dist-subtitle { font-size: 13px; color: #555; margin-bottom: 20px; }
+  .dist-chart {
+    display: flex; align-items: flex-end; gap: 8px;
+    height: 100px; border-bottom: 1px solid #222; padding-bottom: 8px;
+  }
+  .dist-bar-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+  .dist-bar { width: 100%; border-radius: 3px 3px 0 0; background: #9b8afb; opacity: 0.7; min-height: 4px; }
+  .dist-bar.peak { opacity: 1; background: #c4b5fd; }
+  .dist-num { font-size: 10px; color: #555; }
+  .dist-count { font-size: 10px; color: #888; }
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+  .stat-card { border: 1px solid #222; border-radius: 10px; padding: 20px; }
+  .stat-value { font-size: 32px; font-weight: 700; color: #fff; }
+  .stat-label { font-size: 12px; color: #555; margin-top: 4px; }
+  #empty-state { text-align: center; padding: 48px; color: #555; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Random Number Bench</div>
+  <div class="nav-links">
+    <a href="#leaderboard">Leaderboard</a>
+    <a href="#how-it-works">How it works</a>
+    <a href="https://github.com/henrygmarkwardt/random-number-bench" target="_blank">GitHub ↗</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Open Benchmark</div>
+  <h1>Can LLMs guess a <span>random</span> number?</h1>
+  <p>We ask each model to pick a number between 1 and 10, one hundred times. A truly random model scores ~10%. See who's actually random.</p>
+  <div class="hero-actions">
+    <a href="https://github.com/henrygmarkwardt/random-number-bench" class="btn-primary" target="_blank">View on GitHub</a>
+    <a href="#how-it-works" class="btn-secondary">How to contribute</a>
+  </div>
+</div>
+
+<div class="section" id="leaderboard">
+  <div class="section-label">Leaderboard</div>
+  <div class="leaderboard" id="leaderboard-table">
+    <div class="lb-header">
+      <div>#</div><div>Model</div><div>Score</div><div>Randomness</div><div>Tested</div>
+    </div>
+    <div id="lb-rows"></div>
+  </div>
+
+  <div class="dist-section" id="dist-section" style="display:none">
+    <div class="dist-title" id="dist-title"></div>
+    <div class="dist-subtitle">How often the model picked each number across 100 trials</div>
+    <div class="dist-chart" id="dist-chart"></div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-value" id="stat-models">—</div>
+      <div class="stat-label">Models benchmarked</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">100</div>
+      <div class="stat-label">Trials per model</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">~10%</div>
+      <div class="stat-label">Expected random baseline</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="how-it-works">
+  <div class="section-label">How it works</div>
+  <p style="color:#888;font-size:14px;line-height:1.8;max-width:600px">
+    Each model is sent the prompt <em>"Pick a random number between 1 and 10. Reply with just the number, nothing else."</em>
+    100 times. Before each API call, we independently pick a random number. If the model's response matches, it counts as correct.
+    A perfectly random model should score ~10/100. Deviations reveal number biases.<br><br>
+    To add a model: clone the repo, add your OpenRouter API key to <code>.env</code>, run
+    <code>python -m benchmark run --model your/model-id</code>, and open a PR with the updated <code>docs/results.json</code>.
+  </p>
+</div>
+
+<script>
+  async function loadResults() {
+    const res = await fetch('results.json');
+    const all = await res.json();
+
+    // Most recent entry per model
+    const byModel = {};
+    for (const r of all) {
+      if (!byModel[r.model] || r.date > byModel[r.model].date) {
+        byModel[r.model] = r;
+      }
+    }
+    const results = Object.values(byModel).sort((a, b) => b.score - a.score);
+
+    document.getElementById('stat-models').textContent = results.length;
+
+    const lbRows = document.getElementById('lb-rows');
+    if (results.length === 0) {
+      lbRows.innerHTML = '<div id="empty-state">No results yet. Run the benchmark to get started.</div>';
+      return;
+    }
+
+    results.forEach((r, i) => {
+      const row = document.createElement('div');
+      row.className = 'lb-row' + (i === 0 ? ' active' : '');
+      row.dataset.model = r.model;
+      row.innerHTML = `
+        <div class="rank ${i === 0 ? 'gold' : ''}">${i + 1}</div>
+        <div>
+          <div class="model-name">${r.model.split('/').pop()}</div>
+          <div class="model-id">via OpenRouter · ${r.model}</div>
+        </div>
+        <div>
+          <div class="score">${r.score}</div>
+          <div class="score-label">/ ${r.runs}</div>
+        </div>
+        <div>
+          <div class="bar-wrap"><div class="bar-fill" style="width:${r.score}%"></div></div>
+          <div style="font-size:11px;color:#555;margin-top:4px">Expected ~10%</div>
+        </div>
+        <div class="date">${r.date}</div>
+      `;
+      row.addEventListener('click', () => showDistribution(r, row));
+      lbRows.appendChild(row);
+    });
+
+    // Show first model's distribution by default
+    showDistribution(results[0], lbRows.firstElementChild);
+  }
+
+  function showDistribution(r, activeRow) {
+    document.querySelectorAll('.lb-row').forEach(el => el.classList.remove('active'));
+    activeRow.classList.add('active');
+
+    const dist = r.distribution;
+    const counts = Object.values(dist).map(Number);
+    const max = Math.max(...counts, 1);
+
+    document.getElementById('dist-title').textContent =
+      `Number distribution — ${r.model.split('/').pop()}`;
+    document.getElementById('dist-section').style.display = 'block';
+
+    const chart = document.getElementById('dist-chart');
+    chart.innerHTML = '';
+    for (let n = 1; n <= 10; n++) {
+      const count = dist[String(n)] || 0;
+      const height = Math.round((count / max) * 80);
+      const isPeak = count === max;
+      chart.innerHTML += `
+        <div class="dist-bar-wrap">
+          <div class="dist-count">${count}</div>
+          <div class="dist-bar${isPeak ? ' peak' : ''}" style="height:${height}px"></div>
+          <div class="dist-num">${n}</div>
+        </div>
+      `;
+    }
+  }
+
+  loadResults();
+</script>
+</body>
+</html>
