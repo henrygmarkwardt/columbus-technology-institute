@@ -13,8 +13,9 @@ The full write-up lives on the Institute's website as the page
 [columbus-technology-institute](https://github.com/henrygmarkwardt/columbus-technology-institute)
 repository).
 
-**Live leaderboard:** served from this repository's `docs/` folder via GitHub
-Pages — `https://henrygmarkwardt.github.io/random-number-bench` once published.
+This project lives in the Columbus Technology Institute website repository at
+[`/random-number-bench`](https://github.com/henrygmarkwardt/columbus-technology-institute/tree/main/random-number-bench).
+The interactive leaderboard is in this folder's `docs/` directory.
 
 ## How it works
 
@@ -43,8 +44,8 @@ trial is a genuine, scorable answer.
 **Requirements:** Python 3.11+, an [OpenRouter](https://openrouter.ai) API key.
 
 ```bash
-git clone https://github.com/henrygmarkwardt/random-number-bench
-cd random-number-bench
+git clone https://github.com/henrygmarkwardt/columbus-technology-institute
+cd columbus-technology-institute/random-number-bench
 pip install -e .
 cp .env.example .env
 # Edit .env and add your OPENROUTER_API_KEY
