@@ -223,6 +223,124 @@ a { color: inherit; }
   margin: 0;
 }
 
+/* ---- Article (research entry pages) ---- */
+.article { max-width: var(--measure); }
+.article__hero {
+  width: clamp(288px, 42vw, 420px);
+  height: auto;
+  display: block;
+  margin: 0 auto var(--space-4);
+}
+.article__hook {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-5);
+}
+.article__hook-line { display: block; }
+.article__hook-line + .article__hook-line { margin-top: var(--space-2); }
+.rnb { color: var(--accent); }
+.article p.article__contact {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: var(--space-5) 0 0;
+}
+.article__contact a { color: var(--accent); text-decoration: none; }
+.article__contact a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.article p {
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  margin: 0 0 var(--space-3);
+}
+.article h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  line-height: 1.2;
+  margin: var(--space-5) 0 var(--space-3);
+}
+.article a { color: var(--accent); text-decoration: none; }
+.article a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---- Figures (inline-SVG charts) ---- */
+.figure { margin: var(--space-5) 0; }
+.figure__chart { width: 100%; height: auto; display: block; }
+.figure__caption {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin: var(--space-2) 0 0;
+}
+.chart-bar { fill: var(--accent); }
+.chart-grid { stroke: var(--hairline); stroke-width: 1; }
+.chart-axis { stroke: var(--text); stroke-width: 1.5; }
+.chart-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  fill: var(--text);
+}
+.chart-tick {
+  font-family: var(--sans);
+  font-size: 11px;
+  fill: var(--text-muted);
+}
+.chart-value {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--text);
+}
+
+/* ---- Research entry (editorial, no card) ---- */
+.entry {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  text-decoration: none;
+  color: var(--text);
+  max-width: 1000px;
+  margin-top: var(--space-2);
+}
+.entry__body { flex: 1 1 auto; min-width: 0; }
+.entry__hook .rnb { white-space: nowrap; }
+.entry__hook {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.entry__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: var(--space-3);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+.entry__more .arrow { transition: transform 200ms ease; }
+.entry:hover .entry__hook { text-decoration: underline; text-underline-offset: 4px; }
+.entry:hover .entry__more .arrow { transform: translateX(3px); }
+.entry__img {
+  flex: none;
+  width: clamp(110px, 16vw, 170px);
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .entry { flex-direction: column-reverse; gap: var(--space-3); }
+  .entry__img { width: clamp(140px, 50vw, 200px); }
+}
+
 /* ---- Footer ---- */
 .footer {
   flex: none;

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Number Guessing Bench — Columbus Technology Institute</title>
+  <meta name="description" content="A benchmark testing whether frontier LLMs can guess a genuinely random number." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Number Guessing Bench — Columbus Technology Institute" />
+  <meta property="og:description" content="A benchmark testing whether frontier LLMs can guess a genuinely random number." />
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="container">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="index.html" aria-label="Columbus Technology Institute — home">
+        <img class="brand__mark" src="assets/logo.png" alt="" aria-hidden="true" />
+        <span class="brand__name brand__name--full">Columbus Technology Institute</span>
+        <span class="brand__name brand__name--short">CIT</span>
+      </a>
+      <div class="nav__links">
+        <a class="nav__link" href="research.html">Research</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main container">
+    <section class="page">
+      <article class="article">
+        <img class="article__hero" src="assets/number-bench.png" alt="Number Guessing Bench" />
+
+        <h1 class="article__hook">
+          <span class="article__hook-line">Which models are best at guessing <em>random</em> numbers?</span>
+          <span class="article__hook-line">We created <em class="rnb">Random Number Bench</em> to test this.</span>
+        </h1>
+
+        <p>We at the Columbus Technology Institute believe that solving <em>entropy</em> is the <em>key</em> to AGI. We assert that humanity won't have AGI until frontier models can successfully <em>guess</em> a random number a <em>statistically significant</em> number of times.</p>
+
+        <p>We put leading Large Language Models (LLMs) to the test, picking a <em>random</em> number using our proprietary <em>random number generator</em> and then querying LLMs and <em>recording</em> the results.</p>
+
+        <p>We asked each LLM to guess a random number between 1 and 10, <em>100</em> times, and recorded the number of correct guesses, as well as the distribution of <em>guesses</em>.</p>
+
+        <p>The figure below shows the results of our benchmark on <em>11</em> of the most frontier-frontier models.</p>
+
+        <!-- Figure 1: correct guesses per model, ranked best-first -->
+        <figure class="figure">
+          <svg class="figure__chart" viewBox="0 0 720 440" role="img"
+               aria-label="Bar chart of correct guesses out of 100 for each of 11 models, ranked best to worst. Claude Haiku 4.5, Grok Build 0.1 and Gemini 3.1 Flash Lite lead with 12 each; Nex N2 Pro is lowest at 5.">
+            <!-- fixed 0-100 scale; ticks 0,25,50,75,100 (100->y40, 0->y360, 3.2px/unit) -->
+            <line class="chart-grid" x1="150" y1="40"  x2="700" y2="40" />
+            <line class="chart-grid" x1="150" y1="120" x2="700" y2="120" />
+            <line class="chart-grid" x1="150" y1="200" x2="700" y2="200" />
+            <line class="chart-grid" x1="150" y1="280" x2="700" y2="280" />
+            <text class="chart-tick" x="142" y="44"  text-anchor="end">100</text>
+            <text class="chart-tick" x="142" y="124" text-anchor="end">75</text>
+            <text class="chart-tick" x="142" y="204" text-anchor="end">50</text>
+            <text class="chart-tick" x="142" y="284" text-anchor="end">25</text>
+            <text class="chart-tick" x="142" y="364" text-anchor="end">0</text>
+            <!-- y axis title -->
+            <text class="chart-label" transform="rotate(-90 28 200)" x="28" y="200" text-anchor="middle">Correct guesses / 100</text>
+            <!-- baseline -->
+            <line class="chart-axis" x1="150" y1="360" x2="700" y2="360" />
+
+            <!-- bars: fixed scale, score/100 * 320px tall, width 30px, step 50px from x=160 -->
+            <!-- 1 Claude Haiku 4.5 = 12 -->
+            <rect class="chart-bar" x="160" y="321.6" width="30" height="38.4" />
+            <text class="chart-value" x="175" y="313.6" text-anchor="middle">12</text>
+            <text class="chart-label" transform="rotate(-35 175 372)" x="175" y="372" text-anchor="end">Claude Haiku 4.5</text>
+            <!-- 2 Grok Build 0.1 = 12 -->
+            <rect class="chart-bar" x="210" y="321.6" width="30" height="38.4" />
+            <text class="chart-value" x="225" y="313.6" text-anchor="middle">12</text>
+            <text class="chart-label" transform="rotate(-35 225 372)" x="225" y="372" text-anchor="end">Grok Build 0.1</text>
+            <!-- 3 Gemini 3.1 Flash Lite = 12 -->
+            <rect class="chart-bar" x="260" y="321.6" width="30" height="38.4" />
+            <text class="chart-value" x="275" y="313.6" text-anchor="middle">12</text>
+            <text class="chart-label" transform="rotate(-35 275 372)" x="275" y="372" text-anchor="end">Gemini 3.1 Flash Lite</text>
+            <!-- 4 MiniMax M3 = 11 -->
+            <rect class="chart-bar" x="310" y="324.8" width="30" height="35.2" />
+            <text class="chart-value" x="325" y="316.8" text-anchor="middle">11</text>
+            <text class="chart-label" transform="rotate(-35 325 372)" x="325" y="372" text-anchor="end">MiniMax M3</text>
+            <!-- 5 GLM 5.2 = 10 -->
+            <rect class="chart-bar" x="360" y="328" width="30" height="32" />
+            <text class="chart-value" x="375" y="320" text-anchor="middle">10</text>
+            <text class="chart-label" transform="rotate(-35 375 372)" x="375" y="372" text-anchor="end">GLM 5.2</text>
+            <!-- 6 MiMo v2.5 Pro = 9 -->
+            <rect class="chart-bar" x="410" y="331.2" width="30" height="28.8" />
+            <text class="chart-value" x="425" y="323.2" text-anchor="middle">9</text>
+            <text class="chart-label" transform="rotate(-35 425 372)" x="425" y="372" text-anchor="end">MiMo v2.5 Pro</text>
+            <!-- 7 Kimi K2.7 Code = 9 -->
+            <rect class="chart-bar" x="460" y="331.2" width="30" height="28.8" />
+            <text class="chart-value" x="475" y="323.2" text-anchor="middle">9</text>
+            <text class="chart-label" transform="rotate(-35 475 372)" x="475" y="372" text-anchor="end">Kimi K2.7 Code</text>
+            <!-- 8 Qwen3.7 Plus = 8 -->
+            <rect class="chart-bar" x="510" y="334.4" width="30" height="25.6" />
+            <text class="chart-value" x="525" y="326.4" text-anchor="middle">8</text>
+            <text class="chart-label" transform="rotate(-35 525 372)" x="525" y="372" text-anchor="end">Qwen3.7 Plus</text>
+            <!-- 9 Granite 4.1 8B = 8 -->
+            <rect class="chart-bar" x="560" y="334.4" width="30" height="25.6" />
+            <text class="chart-value" x="575" y="326.4" text-anchor="middle">8</text>
+            <text class="chart-label" transform="rotate(-35 575 372)" x="575" y="372" text-anchor="end">Granite 4.1 8B</text>
+            <!-- 10 Mistral Medium 3.5 = 6 -->
+            <rect class="chart-bar" x="610" y="340.8" width="30" height="19.2" />
+            <text class="chart-value" x="625" y="332.8" text-anchor="middle">6</text>
+            <text class="chart-label" transform="rotate(-35 625 372)" x="625" y="372" text-anchor="end">Mistral Medium 3.5</text>
+            <!-- 11 Nex N2 Pro = 5 -->
+            <rect class="chart-bar" x="660" y="344" width="30" height="16" />
+            <text class="chart-value" x="675" y="336" text-anchor="middle">5</text>
+            <text class="chart-label" transform="rotate(-35 675 372)" x="675" y="372" text-anchor="end">Nex N2 Pro</text>
+          </svg>
+          <figcaption class="figure__caption">Figure 1. Correct guesses out of 100 attempts, by model, ranked best-guessers first. A perfectly random guesser would expect about 10.</figcaption>
+        </figure>
+
+        <p>We found that most models guess correctly about <em>10%</em> of the time. This is in line with our expectations, but suggests we are still a long way away from <em>AGI</em></p>
+
+        <p>The figure below shows the total distribution of guesses.</p>
+
+        <!-- Figure 2: total guesses per number, all models combined -->
+        <figure class="figure">
+          <svg class="figure__chart" viewBox="0 0 720 420" role="img"
+               aria-label="Bar chart of total guesses across all 11 models for each number from 1 to 10. The number 7 dominates with 1076 of 1100 guesses; all other numbers are negligible.">
+            <!-- gridlines + y ticks (0, 275, 550, 825, 1100) -->
+            <line class="chart-grid" x1="80" y1="40"  x2="700" y2="40" />
+            <line class="chart-grid" x1="80" y1="120" x2="700" y2="120" />
+            <line class="chart-grid" x1="80" y1="200" x2="700" y2="200" />
+            <line class="chart-grid" x1="80" y1="280" x2="700" y2="280" />
+            <text class="chart-tick" x="72" y="44"  text-anchor="end">1100</text>
+            <text class="chart-tick" x="72" y="124" text-anchor="end">825</text>
+            <text class="chart-tick" x="72" y="204" text-anchor="end">550</text>
+            <text class="chart-tick" x="72" y="284" text-anchor="end">275</text>
+            <text class="chart-tick" x="72" y="364" text-anchor="end">0</text>
+            <text class="chart-label" transform="rotate(-90 24 200)" x="24" y="200" text-anchor="middle">Total guesses (all models)</text>
+            <line class="chart-axis" x1="80" y1="360" x2="700" y2="360" />
+
+            <!-- scale: 1100 -> 320px tall  (px per unit = 0.290909). x: 10 bars, step 58, width 36, start 92 -->
+            <!-- 1 = 0 -->
+            <text class="chart-value" x="110" y="352" text-anchor="middle">0</text>
+            <text class="chart-tick" x="110" y="380" text-anchor="middle">1</text>
+            <!-- 2 = 0 -->
+            <text class="chart-value" x="168" y="352" text-anchor="middle">0</text>
+            <text class="chart-tick" x="168" y="380" text-anchor="middle">2</text>
+            <!-- 3 = 4 -->
+            <rect class="chart-bar" x="208" y="358.8" width="36" height="1.2" />
+            <text class="chart-value" x="226" y="350" text-anchor="middle">4</text>
+            <text class="chart-tick" x="226" y="380" text-anchor="middle">3</text>
+            <!-- 4 = 8 -->
+            <rect class="chart-bar" x="266" y="357.7" width="36" height="2.3" />
+            <text class="chart-value" x="284" y="349" text-anchor="middle">8</text>
+            <text class="chart-tick" x="284" y="380" text-anchor="middle">4</text>
+            <!-- 5 = 6 -->
+            <rect class="chart-bar" x="324" y="358.3" width="36" height="1.7" />
+            <text class="chart-value" x="342" y="350" text-anchor="middle">6</text>
+            <text class="chart-tick" x="342" y="380" text-anchor="middle">5</text>
+            <!-- 6 = 3 -->
+            <rect class="chart-bar" x="382" y="359.1" width="36" height="0.9" />
+            <text class="chart-value" x="400" y="351" text-anchor="middle">3</text>
+            <text class="chart-tick" x="400" y="380" text-anchor="middle">6</text>
+            <!-- 7 = 1076 -->
+            <rect class="chart-bar" x="440" y="47" width="36" height="313" />
+            <text class="chart-value" x="458" y="39" text-anchor="middle">1076</text>
+            <text class="chart-tick" x="458" y="380" text-anchor="middle">7</text>
+            <!-- 8 = 3 -->
+            <rect class="chart-bar" x="498" y="359.1" width="36" height="0.9" />
+            <text class="chart-value" x="516" y="351" text-anchor="middle">3</text>
+            <text class="chart-tick" x="516" y="380" text-anchor="middle">8</text>
+            <!-- 9 = 0 -->
+            <text class="chart-value" x="574" y="352" text-anchor="middle">0</text>
+            <text class="chart-tick" x="574" y="380" text-anchor="middle">9</text>
+            <!-- 10 = 0 -->
+            <text class="chart-value" x="632" y="352" text-anchor="middle">0</text>
+            <text class="chart-tick" x="632" y="380" text-anchor="middle">10</text>
+
+            <text class="chart-label" x="390" y="408" text-anchor="middle">Number guessed</text>
+          </svg>
+          <figcaption class="figure__caption">Figure 2. Total guesses for each number, summed across all 11 models and 1,100 attempts. The number 7 accounts for 1,076 of them.</figcaption>
+        </figure>
+
+        <p>We found that models guess <em>7</em> almost every time.</p>
+
+        <p>Do these models <em>know</em> something we don't? We at the Columbus Technology Institute don't think so &mdash; if they did, we would expect to see <em>higher</em> correct guess totals.</p>
+
+        <p>We invite the community to test more models so we can saturate the benchmark. If you want to make a contribution, head over to our <a href="https://github.com/henrygmarkwardt/number-guessing-bench" target="_blank" rel="noopener">Github</a>.</p>
+
+        <p class="article__contact">Reach out: <a href="mailto:henrygmarkwardt@gmail.com">henrygmarkwardt@gmail.com</a></p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>&copy; 2026 Columbus Technology Institute</span>
+      <span>Columbus, Ohio</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
